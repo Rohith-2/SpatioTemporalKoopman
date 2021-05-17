@@ -20,7 +20,7 @@ end
 
 % lanczos iterative algorithm for large sparse matrices:
 %[U, S, V] = lansvd(A, n, 'L');
-[U S] = svd(A, 'econ');
+[U,S] = svd(A, 'econ');
 sv = diag(S);
 ns = sum(sv > tol);
 

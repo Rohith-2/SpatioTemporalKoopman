@@ -27,7 +27,7 @@
  %
  % $FreeBSD$
 
-function  [Vreconst,deltas,omegas,amplitude,modes] =DMDd(d,V,Time,varepsilon1,varepsilon)
+function  [Vreconst,deltas,omegas,amplitude,modes] =DMDd_SIADS(d,V,Time,varepsilon1,varepsilon)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%  DMD-d %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,7 +51,7 @@ function  [Vreconst,deltas,omegas,amplitude,modes] =DMDd(d,V,Time,varepsilon1,va
 
 [J,K]=size(V);
 
-%% STEP 1: SVD of the original data
+% STEP 1: SVD of the original data
 
 [U,Sigma,T]=svd(V,'econ');
 sigmas=diag(Sigma);
@@ -67,21 +67,21 @@ end
 
 U=U(:,1:kk);
 
-%% Spatial complexity: kk
+% Spatial complexity: kk
 ('Spatial complexity')
 kk
 
-%% Create reduced snapshots matrix
+% Create reduced snapshots matrix
 hatT=Sigma(1:kk,1:kk)*T(:,1:kk)';
 [N,~]=size(hatT);
 
-%% Create the modified snapshot matrix
+% Create the modified snapshot matrix
 tildeT=zeros(d*N,K-d+1);
 for ppp=1:d
     tildeT((ppp-1)*N+1:ppp*N,:)=hatT(:,ppp:ppp+K-d);
 end
 
-%% Dimension reduction
+% Dimension reduction
 [U1,Sigma1,T1]=svd(tildeT,'econ');
 sigmas1=diag(Sigma1);
 
@@ -104,11 +104,11 @@ kk1
 U1=U1(:,1:kk1);
 hatT1=Sigma1(1:kk1,1:kk1)*T1(:,1:kk1)';
 
-%% Reduced modified snapshot matrix
+% Reduced modified snapshot matrix
 [~,K1]=size(hatT1);
 [tildeU1,tildeSigma,tildeU2]=svd(hatT1(:,1:K1-1),'econ');
 
-%% Reduced modified Koopman matrix
+% Reduced modified Koopman matrix
 tildeR=hatT1(:,2:K1)*tildeU2*inv(tildeSigma)*tildeU1';
 [tildeQ,tildeMM]=eig(tildeR);
 eigenvalues=diag(tildeMM);
@@ -127,7 +127,7 @@ for m=1:MMM
     Q(:,m)= Q(:,m)/norm(NormQ(:),2);
 end
 
-%% Calculate amplitudes
+% Calculate amplitudes
 Mm=zeros(NN*K,M);
 Bb=zeros(NN*K,1);
 aa=eye(MMM);
@@ -168,7 +168,7 @@ for m=1:M
     end
 end
 
-%% Spectral complexity: number of DMD modes.
+% Spectral complexity: number of DMD modes.
 ('Spectral complexity')
 kk3
 u=u(:,1:kk3);
@@ -178,7 +178,7 @@ amplitude=amplitude(1:kk3);
 ('Mode number, delta, omega, amplitude')
 DeltasOmegAmpl=[(1:kk3)',deltas',omegas',amplitude']
 
-%% Reconstruction of the original snapshot matrix
+% Reconstruction of the original snapshot matrix
 hatTreconst=zeros(N,K);
 for k=1:K
     hatTreconst(:,k)= ContReconst_SIADS(Time(k),Time(1),u,deltas,omegas);
@@ -186,7 +186,7 @@ end
 
 Vreconst=U*hatTreconst;
 
-%% Calculation of DMD modes
+% Calculation of DMD modes
 modes=zeros(J,kk3);
 amplitude0=zeros(kk3,1);
 for m=1:kk3
