@@ -22,9 +22,9 @@ opts = setvaropts(opts, ["Var1", "Var3", "Var4", "Var6"], "WhitespaceRule", "pre
 opts = setvaropts(opts, ["Var1", "Var3", "Var4", "Var6"], "EmptyFieldRule", "auto");
 
 % Import the data
-BTCUSD = readtable("/Volumes/Rohith/SpatioTemporalKoopman/data/BTC-USD.csv", opts);
-DOGEUSD = readtable("/Volumes/Rohith/SpatioTemporalKoopman/data/DOGE-USD.csv", opts);
-ETHUSD = readtable("/Volumes/Rohith/SpatioTemporalKoopman/data/ETH-USD.csv", opts);
+BTCUSD = readtable("/Volumes/Rohith/College/SpatioTemporalKoopman/data/BTC-USD.csv", opts);
+DOGEUSD = readtable("/Volumes/Rohith/College/SpatioTemporalKoopman/data/DOGE-USD.csv", opts);
+ETHUSD = readtable("/Volumes/Rohith/College/SpatioTemporalKoopman/data/ETH-USD.csv", opts);
 
 % Convert to output type
 BTC = table2array(BTCUSD)';
