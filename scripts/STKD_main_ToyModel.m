@@ -1,0 +1,68 @@
+clc
+clear vars
+close all
+
+load V.mat
+load Time.mat
+load Exis.mat
+
+% APPLY STKD TO V
+[J,K]=size(V);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% STKD  PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% SET PARAMETERS STKD
+% Tolerances
+% SVD
+varepsilon1=1e-8;
+% DMD
+varepsilon2=1e-7;
+% Set index d: dSpace for spatial analysis and dTime for temporal analysis
+dSpace=10;
+dTime=1;
+
+[Vreconst,Modes,Amplitudes,Amplitudesx,GrowthRatex,Frequencyx,Amplitudest,GrowthRatet,Frequencyt]=...
+CalculateDMDdSdT(dSpace,dTime,Time,Exis,V,varepsilon1,varepsilon2);
+
+% CALCULATE RRMS ERROR
+dif=Vreconst-V;
+errorRMS=norm(dif(:))/norm(V(:));
+disp('Reconstruction error: RRMSE')
+disp(errorRMS)
+
+
+% PLOT RECONSTRUCTION
+h9=figure;
+axes9 = axes('Parent',h9,'FontSize',14,'FontName','Agency FB');
+box(axes9,'on');
+pcolor(Exis,Time,real(Vreconst'))
+shading('interp')
+colormap(jet)
+xlabel('x')
+ylabel('t')
+
+% Plot: frequency/wavenumber vs. amplitude, vs. growth rate
+figure1 = figure;
+axes1 = axes('Parent',figure1);
+hold(axes1,'on');
+box(axes1,'on');
+semilogy(Frequencyt,GrowthRatet,'o','linewidth',2,'color','k','MarkerSize',8);
+semilogy(Frequencyx,GrowthRatex,'o','linewidth',2,'color','b','MarkerSize',8);
+set(axes1,'YMinorTick','on');
+xlabel('Frequency/Wavenumber')
+ylabel('Growth Rate')
+
+
+figure1 = figure;
+axes1 = axes('Parent',figure1);
+hold(axes1,'on');
+box(axes1,'on');
+semilogy(Frequencyt,Amplitudest,'+','linewidth',2,'color','k','MarkerSize',8);
+semilogy(Frequencyx,Amplitudesx,'+','linewidth',2,'color','b','MarkerSize',8);
+set(axes1,'YMinorTick','on','YScale','log');
+xlabel('Frequency/Wavenumber')
+ylabel('Amplitude')
+
+
