@@ -1,6 +1,8 @@
 clc
-clear vars
+clear all
 close all
+
+addpath '/Volumes/Rohith/College/SpatioTemporalKoopman/HODMD'
 
 load V.mat
 load Time.mat
@@ -64,5 +66,3 @@ semilogy(Frequencyx,Amplitudesx,'+','linewidth',2,'color','b','MarkerSize',8);
 set(axes1,'YMinorTick','on','YScale','log');
 xlabel('Frequency/Wavenumber')
 ylabel('Amplitude')
-
-

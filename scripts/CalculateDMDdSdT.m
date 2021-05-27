@@ -20,6 +20,7 @@ disp(kk)
 % Escale with singular values
 hatx=Sigma(1:kk,1:kk)*U(:,1:kk)';
 hatT=Sigma(1:kk,1:kk)*T(:,1:kk)';
+
 Sigma=Sigma(1:kk,1:kk);
 %[N,~]=size(hatT);
 
