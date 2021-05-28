@@ -4,17 +4,11 @@ close all
 
 addpath '/Volumes/Rohith/College/SpatioTemporalKoopman/HODMD'
 
-%load V.mat
 load sent_snp.mat
-%load momo.mat
-V = sent;
 %load Time.mat
 %load Exis.mat
-s = size(V);
-Time = linspace(0,1,s(2));
-Exis = linspace(0,1,s(1));
-
-
+Time = linspace(0,1,78);
+Exis = linspace(0,1,34);
 % APPLY STKD TO V
 [J,K]=size(V);
 
@@ -46,19 +40,11 @@ disp(errorRMS)
 h9=figure;
 axes9 = axes('Parent',h9,'FontSize',14,'FontName','Agency FB');
 box(axes9,'on');
-pcolor(abs(Vreconst))
+pcolor(Exis,Time,real(Vreconst'))
 shading('interp')
 colormap(jet)
-xlabel('Date')
-ylabel('Sentiment')
-
-figure
-pcolor(V)
-shading('interp')
-colormap(jet)
-xlabel('Date')
-ylabel('Sentiment')
-title("OG Data")
+xlabel('x')
+ylabel('t')
 
 % Plot: frequency/wavenumber vs. amplitude, vs. growth rate
 figure1 = figure;

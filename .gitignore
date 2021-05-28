@@ -28,3 +28,8 @@ data/._BTC-USD_daily-06_02-24_04.csv
 data/._Bitcoin_tweets.csv
 Notebooks/.ipynb_checkpoints/Tweets-checkpoint.ipynb
 data/._sent.csv
+data/._closing_price_sent.m
+data/._momo.mat
+scripts/._data_sent.m
+scripts/._Sent_Date.m
+scripts/._sent_snp.mat
