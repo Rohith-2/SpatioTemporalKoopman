@@ -34,3 +34,6 @@ scripts/._data_sent.m
 scripts/._Sent_Date.m
 scripts/._sent_snp.mat
 Ref_Papers/._STKD.pdf
+data/._TweetsElonMusk.csv
+Ref_Papers/._STKD.pdf
+scripts/._STKD_toy.m

@@ -29,7 +29,7 @@ varepsilon1=1e-8;
 % DMD
 varepsilon2=1e-7;
 % Set index d: dSpace for spatial analysis and dTime for temporal analysis
-dSpace=10;
+dSpace=2;
 dTime=1;
 
 [Vreconst,Modes,Amplitudes,Amplitudesx,GrowthRatex,Frequencyx,Amplitudest,GrowthRatet,Frequencyt]=...
