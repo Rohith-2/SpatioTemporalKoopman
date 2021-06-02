@@ -52,3 +52,7 @@ scripts/._extract_sent.py
 Ref_Papers/._STKD.pdf
 data/._date_sent.csv
 scripts/._SVD.mlx
+data/._DOGE-USD_v1.csv
+Notebooks/._News_v2.ipynb
+scripts/._Matrix.csv
+scripts/._sent_DOGE_STKD.m

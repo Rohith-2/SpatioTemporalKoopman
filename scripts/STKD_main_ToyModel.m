@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-addpath '/Volumes/Rohith/College/SpatioTemporalKoopman/HODMD'
+addpath 'SpatioTemporalKoopman/HODMD'
 
 %load V.mat
 load sent_snp.mat
