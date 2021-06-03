@@ -32,7 +32,7 @@ Matrix = table2array(Matrix);
 % Clear temporary variables
 clear opts
 
-V = Matrix;
+V = 100*Matrix;
 s = size(V);
 Time = linspace(0,1,s(2));
 Exis = linspace(0,1,s(1));
